@@ -35,7 +35,7 @@ function checkWinner (a, b, c) {
         span[a].parentNode.className += " activeBox";
         span[b].parentNode.className += " activeBox";
         span[c].parentNode.className += " activeBox";
-        ifGameOver(a);
+        gameOver(a);
     }
 }
 
@@ -46,4 +46,32 @@ function playAgain() {
     for (var k = 0; k < span.length; k++) {
         span[k].parentNode.className = span[k].parentNode.className.replace("activeBox", "");
     }
+}
+
+function resetGame() {
+    for (i = 0; i < span.length; i++) {
+        span[i].dataset.player = "none";
+        span[i].innerHTML = "&nbsp;";
+    }
+    playerTurn = "x";
+}
+
+function gameOver(a) {
+    var gameOverAlertElement = "<b>GAME OVER </b><br><br> Player " + span[a].dataset.player.toUpperCase() + " Win !!! <br><br>" + restartButton;
+    var div = document.createElement("div");
+    div.className = "alert";
+    div.innerHTML = gameOverAlertElement;
+    document.getElementsByTagName("body")[0].appendChild(div);
+    window.isGameOver = true;
+    moves = 0;
+}
+
+function draw() {
+    var drawAlertElement = '<b>DRAW!!!</b><br><br>' + restartButton;
+    var div = document.createElement("div");
+    div.className = "alert";
+    div.innerHTML = drawAlertElement;
+    document.getElementsByTagName("body")[0].appendChild(div);
+    window.isGameOver = true;
+    moves = 0;
 }
